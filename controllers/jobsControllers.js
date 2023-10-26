@@ -1,8 +1,7 @@
 import "express-async-errors";
-
 import Job from "../models/jobModels.js";
 import { StatusCodes } from "http-status-codes";
-import { NotFoundError } from "../errors/customErrors.js";
+
 
 export const getAllJobs = async  (req, res) => {
     const jobs = await Job.find({});
@@ -10,38 +9,25 @@ export const getAllJobs = async  (req, res) => {
   };
 
   export const createJobs = async  (req, res) => {
-  const {company, position} = req.body;
-
-    const job = await Job.create({company,position})
+    const job = await Job.create(req.body);
 
     res.status(StatusCodes.CREATED).json({job});
 }
 
 export const getSingleJob = async  (req, res) => {
-    const {id} = req.params;
-    const job = await Job.findById(id);
-
-    if(!job) throw new NotFoundError(`no job found with the give id ${id}`);
-
+    const job = await Job.findById(req.params.id);
     res.status(StatusCodes.OK).json({job});
 }
 
 export const editJob = async (req, res) =>{
-    const {id} = req.params;
-    const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
+    const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, {
         new: true
     })
-    if(!updatedJob) throw new NotFoundError(`no job found with the give id ${id}`);
-
     res.status(StatusCodes.OK).json({msg: "job successfully modified", job: updatedJob});
 
 }
 
-export const deleteJob = async  (req, res) => {
-    const { id } = req.params;
-    const removeJob = await Job.findByIdAndDelete(id);
-
-    if (!removeJob) throw new NotFoundError(`no job found with the give id ${id}`);
-
-    res.status(StatusCodes.OK).json({ msg: 'job deleted', job: removeJob });
+export const deleteJob = async  (req, res) => { 
+    const removeJob = await Job.findByIdAndDelete(req.params.id);
+  res.status(StatusCodes.OK).json({ msg: 'job deleted', job: removeJob });
   }

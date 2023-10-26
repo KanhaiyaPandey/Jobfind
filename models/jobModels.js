@@ -20,7 +20,7 @@ const jobSchema = new mongoose.Schema(
 
     jobLocation: {
         type: String,
-        default: "my city"
+       default: "my-city"
     },
     
 }, 

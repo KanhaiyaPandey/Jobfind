@@ -11,6 +11,7 @@ import {StatusCodes} from "http-status-codes";
 
 // routes
 import jobRoutes from './routes/jobsRoutes.js';
+import authRouter from "./routes/authRouter.js"
 
 // middleware
 import errorHandler from "./middleware/errorHandler.js";
@@ -28,7 +29,8 @@ app.get('/', (req, res) => {
 });
 
 
-app.use("/api/v1/jobs", jobRoutes)
+app.use("/api/v1/jobs", jobRoutes);
+app.use("/api/v1/auth", authRouter);
 
 
 // not found error
