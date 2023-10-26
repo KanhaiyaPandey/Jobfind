@@ -4,9 +4,10 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 const app = express();
-import morgan from "morgan";
+import morgan, { format } from "morgan";
 import mongoose from "mongoose";
 import {StatusCodes} from "http-status-codes";
+
 
 // routes
 import jobRoutes from './routes/jobsRoutes.js';
@@ -19,11 +20,8 @@ if(process.env.NODE_ENV === "development"){
 }
 
 app.use(express.json());
+app.use(errorHandler);
 
-app.post('/', (req, res) => {
-    console.log(req);
-     res.json({message:"data recived", data: req.body})
-});
 
 app.get('/', (req, res) => {
     res.send('hello world');
