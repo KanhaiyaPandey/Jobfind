@@ -9,7 +9,6 @@ export const register = async(req, res) =>{
     req.body.role = isFirst? "admin": "user";
  
     const hashedPassword = await hashPassword(req.body.password)
-    console.log(hashedPassword);
     req.body.password = hashedPassword;
 
 
