@@ -9,7 +9,9 @@ export const register = async(req, res) =>{
     req.body.role = isFirst? "admin": "user";
  
     const hashedPassword = await hashPassword(req.body.password)
-    req.body.password = hashPassword;
+    console.log(hashedPassword);
+    req.body.password = hashedPassword;
+
 
     const user = await UserModel.create(req.body)
     res.status(StatusCodes.CREATED).json({ msg: "user created" });
@@ -21,8 +23,13 @@ export const login = async (req, res) =>{
     if(!isValidUser) throw new UnauthenticatedError("invalid credentials");
 
 
-    const token = createJWT({userId: user._id, role: user.role})
+    const token = createJWT({userId: user._id, role: user.role});
+    const oneDay = 1000 * 60*60*24;
 
-
-    res.send({token});
+res.cookie("token", token,{ 
+httpOnly: true,
+expires: new Date(Date.now()+ oneDay),
+secure: process.env.NODE_ENV === "production"
+})
+  res.status(StatusCodes.OK).json({msg: "user logged in"})
 }

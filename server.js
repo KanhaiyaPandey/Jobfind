@@ -8,6 +8,8 @@ import morgan, { format } from "morgan";
 import mongoose from "mongoose";
 import {StatusCodes} from "http-status-codes";
 
+// cookie parser
+import cookieParser from "cookie-parser";
 
 // routes
 import jobRoutes from './routes/jobsRoutes.js';
@@ -15,11 +17,12 @@ import authRouter from "./routes/authRouter.js"
 
 // middleware
 import errorHandler from "./middleware/errorHandler.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
 
 if(process.env.NODE_ENV === "development"){
   app.use(morgan('dev'));
 }
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(errorHandler);
 
@@ -29,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use("/api/v1/jobs", jobRoutes);
+app.use("/api/v1/jobs",authenticateUser ,jobRoutes);
 app.use("/api/v1/auth", authRouter);
 
 
