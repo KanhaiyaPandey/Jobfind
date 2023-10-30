@@ -13,7 +13,8 @@ import cookieParser from "cookie-parser";
 
 // routes
 import jobRoutes from './routes/jobsRoutes.js';
-import authRouter from "./routes/authRouter.js"
+import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js"
 
 // middleware
 import errorHandler from "./middleware/errorHandler.js";
@@ -26,6 +27,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(errorHandler);
 
+app.get('/api/v1/test', (req, res) => {
+  res.json({ msg: 'test route' });
+});
 
 app.get('/', (req, res) => {
     res.send('hello world');
@@ -33,6 +37,7 @@ app.get('/', (req, res) => {
 
 
 app.use("/api/v1/jobs",authenticateUser ,jobRoutes);
+app.use("/api/v1/users",authenticateUser, userRouter);
 app.use("/api/v1/auth", authRouter);
 
 

@@ -59,7 +59,11 @@ export const validateRegisterInput = withValidationErrors([
           const user = await User.findOne({email});
           if(user) throw BadRequestError("user already exists")
    }),
-   body("password").notEmpty().withMessage("password is reqired").isLength({min:8}).withMessage("password must be 8 characters long"),
+   body("password")
+   .notEmpty()
+   .withMessage("password is reqired")
+   .isLength({min:8})
+   .withMessage("password must be 8 characters long"),
    body("location").notEmpty().withMessage("location is required"),
    body("lastName").notEmpty().withMessage("last name is required"),
 ]);
@@ -70,4 +74,25 @@ export const validateLoginInput = withValidationErrors([
    .isEmail().withMessage("invalid email please enter valid email"),
  
    body("password").notEmpty().withMessage("password is reqired"),
+]);
+
+
+
+export const validateUpdateUserInput = withValidationErrors([
+
+
+   body("name").notEmpty().withMessage("name is required"),
+   body("email").notEmpty().withMessage("email is required")
+   .isEmail().withMessage("invalid email please enter valid email")
+   .custom(async (email) =>{
+          const user = await User.findOne({email});
+          if(user && user._id.toString()!= req.user.userId) {
+            throw BadRequestError("email already exists");
+          }
+   }),
+ 
+   body("location").notEmpty().withMessage("location is required"),
+   body("lastName").notEmpty().withMessage("last name is required"),
+
+
 ])
