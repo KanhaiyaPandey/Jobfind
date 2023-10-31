@@ -57,7 +57,7 @@ export const validateRegisterInput = withValidationErrors([
    .isEmail().withMessage("invalid email please enter valid email")
    .custom(async (email) =>{
           const user = await User.findOne({email});
-          if(user) throw BadRequestError("user already exists")
+          if(user) throw new BadRequestError("email already exists")
    }),
    body("password")
    .notEmpty()
@@ -87,7 +87,7 @@ export const validateUpdateUserInput = withValidationErrors([
    .custom(async (email) =>{
           const user = await User.findOne({email});
           if(user && user._id.toString()!= req.user.userId) {
-            throw BadRequestError("email already exists");
+            throw new BadRequestError("email already exists");
           }
    }),
  

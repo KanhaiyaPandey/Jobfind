@@ -12,6 +12,7 @@ import Admin from "./pages/Admin";
 import Stats from "./pages/Stats";
 import AllJobs from "./pages/AllJobs";
 import Profile from "./pages/Profile";
+import { loginAction, registrationAction } from "./utils/Helper.js";
 
 
 const checkDefaultTheme = () => {
@@ -37,13 +38,15 @@ const router = createBrowserRouter([
 
       {
         path: "register",
-        element: <Register />
-      },
+        element: <Register />,
+        action: registrationAction  
+       },
     
       
       {
         path: "login",
-        element: <Login />
+        element: <Login />,
+        action: loginAction
       },
     
       
