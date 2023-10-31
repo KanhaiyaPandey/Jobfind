@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { redirect } from "react-router-dom";
 import customFetch from "./customUrl";
 import { toast } from 'react-toastify';
@@ -31,3 +32,18 @@ export const registrationAction = async ({request}) =>{
       return error;
     }
 };
+
+export const createJobAction = async ({request}) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  
+  try {
+      await customFetch.post('/jobs', data);
+      toast.success('job added successfully');
+      return redirect("all-jobs")
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.msg);
+      return error;
+    }
+}

@@ -12,8 +12,9 @@ import Admin from "./pages/Admin";
 import Stats from "./pages/Stats";
 import AllJobs from "./pages/AllJobs";
 import Profile from "./pages/Profile";
-import { loginAction, registrationAction } from "./utils/Actions.js";
-import { loader } from "./utils/Loaders.js";
+import { createJobAction, loginAction, registrationAction } from "./utils/Actions.js";
+import { dashboardLoader, jobsLoader } from "./utils/Loaders.js";
+import AddJob from "./pages/AddJob";
 
 
 const checkDefaultTheme = () => {
@@ -54,8 +55,14 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout isDarkThemeEnabled = {isDarkThemeEnabled}/>,
-        loader: loader,
+        loader: dashboardLoader,
         children: [
+          {
+             index: true,
+             element:<AddJob />,
+             action: createJobAction
+          },
+
           {
             path: "admin",
             element: <Admin/>
@@ -66,7 +73,8 @@ const router = createBrowserRouter([
           },
           {
             path: "all-jobs",
-            element: <AllJobs/>
+            element: <AllJobs/>,
+            loader: jobsLoader
           },
           {
               path: "profile",
