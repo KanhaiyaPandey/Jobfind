@@ -12,7 +12,8 @@ import Admin from "./pages/Admin";
 import Stats from "./pages/Stats";
 import AllJobs from "./pages/AllJobs";
 import Profile from "./pages/Profile";
-import { loginAction, registrationAction } from "./utils/Helper.js";
+import { loginAction, registrationAction } from "./utils/Actions.js";
+import { loader } from "./utils/Loaders.js";
 
 
 const checkDefaultTheme = () => {
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout isDarkThemeEnabled = {isDarkThemeEnabled}/>,
+        loader: loader,
         children: [
           {
             path: "admin",

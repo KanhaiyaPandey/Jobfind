@@ -5,13 +5,16 @@ import Wrapper from '../assets/wrappers/Dashboard'
 import SmallSidebar from '../components/SmallSidebar'
 import BigSidebar from '../components/BigSidebar'
 import Navbar from '../components/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom'
+import customFetch from '../utils/customUrl'
+import { toast } from 'react-toastify'
 
 const DashboardContext = createContext()
 
 const DashboardLayout = ({ isDarkThemeEnabled }) => {
-
-  const user = {name: "john"};
+  const {user}= useLoaderData();
+  const navigate = useNavigate();
+  
   const  [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
   
@@ -22,12 +25,14 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
     localStorage.setItem('darkTheme', newDarkTheme);
   };
 
-  const toggleSidebar = () =>{
+  const toggleSidebar = async () =>{
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = () => {
-        console.log("logout user");
+  const logoutUser = async () => {
+        navigate("/")
+        await customFetch.get("/user/logout");
+        toast.success("logged out successfully");
   }
 
 
@@ -47,7 +52,7 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
         <div>
           <Navbar />
           <div className='dashboard-page'>
-            <Outlet />
+            <Outlet context={{user}} />
           </div>
         </div>
       </main>
