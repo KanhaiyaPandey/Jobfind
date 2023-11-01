@@ -22,4 +22,14 @@ export const jobsLoader = async () =>{
      toast.error(error?.response?.data?.msg);
      return (error);
   }
+};
+
+export const editLoader = async ({params}) =>{
+   try {
+      const { data } = await customFetch.get(`/jobs/${params.id}`);
+      return data;
+    } catch (error) {
+      toast.error(error.response.data.msg);
+      return redirect('/dashboard/all-jobs');
+    }
 }

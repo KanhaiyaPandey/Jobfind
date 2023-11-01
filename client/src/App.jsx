@@ -12,8 +12,9 @@ import Admin from "./pages/Admin";
 import Stats from "./pages/Stats";
 import AllJobs from "./pages/AllJobs";
 import Profile from "./pages/Profile";
-import { createJobAction, loginAction, registrationAction } from "./utils/Actions.js";
-import { dashboardLoader, jobsLoader } from "./utils/Loaders.js";
+import EditJob from "./pages/EditJob"; 
+import { createJobAction, editAction, loginAction, registrationAction } from "./utils/Actions.js";
+import { dashboardLoader, editLoader, jobsLoader } from "./utils/Loaders.js";
 import AddJob from "./pages/AddJob";
 
 
@@ -66,6 +67,13 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin/>
+          },
+          {
+            path:"edit-job/:id",
+            element:<EditJob/>,
+            loader: editLoader,
+            action: editAction
+
           },
           {
             path: "stats",

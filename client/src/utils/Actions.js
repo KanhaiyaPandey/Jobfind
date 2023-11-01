@@ -47,3 +47,7 @@ export const createJobAction = async ({request}) => {
       return error;
     }
 }
+
+export const editAction = async () =>{
+  return null;
+}
