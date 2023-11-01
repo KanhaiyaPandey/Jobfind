@@ -48,6 +48,15 @@ export const createJobAction = async ({request}) => {
     }
 }
 
-export const editAction = async () =>{
-  return null;
+export const editAction = async ({request,params}) =>{
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+     await customFetch.patch(`/jobs/${params.id}`, data);
+     toast.success("job edited successfully");
+     return redirect("/dashboard/all-jobs")
+  } catch (error) {
+    toast.error(error.response.data.msg);
+      return redirect('/dashboard/all-jobs');
+  }
 }
