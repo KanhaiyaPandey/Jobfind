@@ -3,8 +3,7 @@ import FormRow from '../components/FormRow';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { useOutletContext } from 'react-router-dom';
 import { useNavigation, Form } from 'react-router-dom';
-import customFetch from '../utils/customUrl';
-import { toast } from 'react-toastify';
+
 
 const Profile = () => {
   const { user } = useOutletContext();

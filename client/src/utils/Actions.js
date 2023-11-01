@@ -69,4 +69,23 @@ export const deleteAction = async({params}) => {
     toast.error(error?.response?.data?.msg);
   }
   return redirect("../all-jobs")
+};
+
+export const profileAction = async ({ request }) =>{
+  const formData = await request.formData();
+
+  const file = formData.get("avatar");
+   if(file && file.size > 50000){
+    toast.error("please choose file of size in range 500kb");
+    return null;
+   }
+
+   try {
+    await customFetch.patch('/users/update-user', formData);
+    toast.success('Profile updated successfully');
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.msg);
+  }
+  return null;
 }
