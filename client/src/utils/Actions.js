@@ -56,7 +56,17 @@ export const editAction = async ({request,params}) =>{
      toast.success("job edited successfully");
      return redirect("/dashboard/all-jobs")
   } catch (error) {
-    toast.error(error.response.data.msg);
+    toast.error(error?.response?.data?.msg);
       return redirect('/dashboard/all-jobs');
   }
+}
+
+export const deleteAction = async({params}) => {
+  try {
+     await customFetch.delete(`/jobs/${params.id}`);
+     toast.success("job deleted successfully");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+  }
+  return redirect("../all-jobs")
 }

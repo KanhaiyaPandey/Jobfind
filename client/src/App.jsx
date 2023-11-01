@@ -13,7 +13,7 @@ import Stats from "./pages/Stats";
 import AllJobs from "./pages/AllJobs";
 import Profile from "./pages/Profile";
 import EditJob from "./pages/EditJob"; 
-import { createJobAction, editAction, loginAction, registrationAction } from "./utils/Actions.js";
+import { createJobAction, deleteAction, editAction, loginAction, registrationAction } from "./utils/Actions.js";
 import { dashboardLoader, editLoader, jobsLoader } from "./utils/Loaders.js";
 import AddJob from "./pages/AddJob";
 
@@ -87,6 +87,10 @@ const router = createBrowserRouter([
           {
               path: "profile",
               element: <Profile/>
+          },
+          {
+             path: "delete-job/:id",
+             action: deleteAction
           }
         ]
       },
