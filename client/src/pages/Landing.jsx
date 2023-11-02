@@ -22,8 +22,8 @@ const Landing = () => {
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, magnam obcaecati ab laborum tempora blanditiis nihil repudiandae hic quos sint ducimus impedit minus porro vel.
      Rem vero nostrum velit explicabo!</p>
 
-    <Link to="/register" className='btn register-link'> Register/demo user </Link>
-    <Link to="/login" className='btn'> Login </Link>
+    <Link to="/register" className='btn register-link'> Register </Link>
+    <Link to="/login" className='btn'> Login/demo user </Link>
  </div>
 
 <img alt='img' src={main} className='img main-img'/>
