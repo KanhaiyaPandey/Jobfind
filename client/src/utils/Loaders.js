@@ -15,6 +15,7 @@ export const dashboardLoader = async () =>{
 }
 
 export const jobsLoader = async () =>{
+  console.log("hello");
   try {
      const {data} = await customFetch.get("/jobs");
      return {data};
