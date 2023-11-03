@@ -15,7 +15,7 @@ import Profile from "./pages/Profile";
 import EditJob from "./pages/EditJob"; 
 import { createJobAction, deleteAction, editAction,
 loginAction, profileAction, registrationAction } from "./utils/Actions.js";
-import { adminloader, dashboardLoader, editLoader, jobsLoader } from "./utils/Loaders.js";
+import { adminloader, dashboardLoader, editLoader, jobsLoader, StatsLoader } from "./utils/Loaders.js";
 import AddJob from "./pages/AddJob";
 
 
@@ -79,7 +79,8 @@ const router = createBrowserRouter([
           },
           {
             path: "stats",
-            element: <Stats/>
+            element: <Stats/>,
+            loader: StatsLoader
           },
           {
             path: "all-jobs",

@@ -1,4 +1,4 @@
-import { UnauthenticatedError, UnauthorizedError } from "../errors/customErrors.js";
+import { BadRequestError, UnauthenticatedError, UnauthorizedError } from "../errors/customErrors.js";
 import { verifyJWT } from "../utils/tokenUtils.js";
 
 export const authenticateUser = (req, res , next) => {
@@ -25,3 +25,8 @@ return (req, res, next)=>{
   next();
 }
 };
+
+export const checkTestUser = (req,res, next) => {
+  if(req.user.testUser) throw new BadRequestError("test user read only");
+  next();
+}

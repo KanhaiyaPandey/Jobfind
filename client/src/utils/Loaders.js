@@ -43,3 +43,12 @@ export const adminloader = async () => {
      return redirect('/dashboard');
    }
  };
+
+ export const StatsLoader = async () =>{
+ try {
+    const response = await customFetch.get("/jobs/stats");
+    return response.data
+ } catch (error) {
+   return error
+ }
+ }

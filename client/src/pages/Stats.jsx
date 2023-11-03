@@ -1,10 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import ChartsContainer from "../components/ChartsContainer";
+import StatsContainer from "../components/StatsContainer";
+import { useLoaderData } from "react-router-dom";
 
 const Stats = () => {
+  const { defaultStats, monthlyApplications } = useLoaderData();
   return (
-    <div>Stats</div>
-  )
+    <>
+      <StatsContainer defaultStats={defaultStats} />
+      {monthlyApplications?.length > 0 && (
+        <ChartsContainer data={monthlyApplications} />
+      )}
+    </>
+  );
 }
 
 export default Stats
