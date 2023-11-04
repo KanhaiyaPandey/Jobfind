@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useDashboardContext } from '../pages/DashboardLayout'
 import links from '../utils/Links'
 import { NavLink } from 'react-router-dom'
 
-const Navlinks = () => {
+const Navlinks = ({isBigSidebar}) => {
    const {toggleSidebar,user} = useDashboardContext();
+
   return (
     <div className="nav-links">
     {links.map((link) => {
@@ -14,7 +16,7 @@ const Navlinks = () => {
       if(role!== "admin" && path==="admin") return;
       return <NavLink to = {path} key ={text}
       className="nav-link"
-      onClick={toggleSidebar}
+      onClick={isBigSidebar? null : toggleSidebar}
       end >
         <span className='icon'>{icon}
         </span>{text}

@@ -10,12 +10,12 @@ const BigSidebar = () => {
   const {showSidebar} = useDashboardContext();
   return (
     <Wrapper>
-<div className={showSidebar ? "sidebar-container " : "sidebar-container show-sidebar"}>
+<div className={showSidebar ? "sidebar-container ": " sidebar-container show-sidebar "}>
     <div className="content">
       <header>
         <Logo/>
       </header>
-      <Navlinks/>
+      <Navlinks isBigSidebar/>
     </div>
  </div>
     </Wrapper>
