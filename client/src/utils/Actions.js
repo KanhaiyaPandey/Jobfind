@@ -75,7 +75,7 @@ export const profileAction = async ({ request }) =>{
   const formData = await request.formData();
 
   const file = formData.get("avatar");
-   if(file && file.size > 50000){
+   if(file && file.size > 500000){
     toast.error("please choose file of size in range 500kb");
     return null;
    }
